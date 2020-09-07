@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotara/constants/RoutingConstants.dart';
 import 'package:dotara/values/ColorsLocal.dart';
 import 'package:dotara/view_models/SplashVM.dart';
+import 'package:dotara/views/LogIn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -163,77 +164,74 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Visibility(
-                visible: snapshot.listenMusic,
-                child: Container(
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60),
-                    gradient: LinearGradient(
-                        colors: [
-                          Color(0xffE0330D).withOpacity(1),
-                          Color(0xffFFA756).withOpacity(1)
-                        ],
+              Container(
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60),
+                  gradient: LinearGradient(
+                      colors: [
+                        Color(0xffE0330D).withOpacity(1),
+                        Color(0xffFFA756).withOpacity(1)
+                      ],
 //                  begin: const FractionalOffset(3, 0.0),
 //                  end: const FractionalOffset(.2, 0.0),
-                        begin: FractionalOffset.centerLeft,
-                        end: FractionalOffset.centerRight,
-                        stops: [0.0, 1.0],
-                        tileMode: TileMode.clamp),
+                      begin: FractionalOffset.centerLeft,
+                      end: FractionalOffset.centerRight,
+                      stops: [0.0, 1.0],
+                      tileMode: TileMode.clamp),
+                ),
+                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                width: double.infinity,
+                child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60.0),
+                    //side: BorderSide(color: Colors.white, width: 0)
                   ),
-                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  width: double.infinity,
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(60.0),
-                      //side: BorderSide(color: Colors.white, width: 0)
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    onPressed: () {
-                      // Toast.show("GG", context);
-                      Navigator.pushNamed(context, HomeRoute);
-                    },
-                    child: Text(
-                      "Create Account",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "BalooDa2",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20),
-                    ),
-                    //color: Colors.transparent,
-                    height: 50,
+                  clipBehavior: Clip.antiAlias,
+                  onPressed: () {
+                    // Toast.show("GG", context);
+                    print("create acc");
+                    Navigator.pushNamed(context, SignUpRoute);
+                  },
+                  child: Text(
+                    "Create Account",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "BalooDa2",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  ),
+                  //color: Colors.transparent,
+                  height: 50,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(25, 18, 25, 40),
+                width: double.infinity,
+                child: MaterialButton(
+                  color: ColorsLocal.hexToColor("31353A"),
+                  clipBehavior: Clip.antiAlias,
+                  onPressed: () {
+                    //snapshot.pressed();
+                    print("sign");
+                    Navigator.pushNamed(context, LogInRoute);
+                  },
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "BalooDa2",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  ),
+                  height: 50,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60.0),
+                    //side: BorderSide(color: Colors.white, width: 0)
                   ),
                 ),
               ),
-              Visibility(
-                visible: snapshot.signIn,
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(25, 18, 25, 40),
-                  width: double.infinity,
-                  child: MaterialButton(
-                    color: ColorsLocal.hexToColor("31353A"),
-                    clipBehavior: Clip.antiAlias,
-                    onPressed: () {
-                      snapshot.pressed();
-                    },
-                    child: Text(
-                      "Sign In",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "BalooDa2",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20),
-                    ),
-                    height: 50,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(60.0),
-                      //side: BorderSide(color: Colors.white, width: 0)
-                    ),
-                  ),
-                ),
-              ),
-              Visibility(visible: snapshot.signUp, child: _singIn()),
+             // Visibility(visible: snapshot.signUp, child: _singIn()),
               Container(
                 margin: EdgeInsets.only(bottom: 20),
                 child: Column(
