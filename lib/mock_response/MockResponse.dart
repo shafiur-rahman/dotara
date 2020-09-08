@@ -767,4 +767,60 @@ class MockResponse {
       "plan_name": "Starter Pack"
     });
   }
+
+
+
+  //TODO: Dotara
+
+  static String getGenreList() {
+    return json.encode({
+      "items": [
+        {
+          "id": 1,
+         "name": "Classic"
+        },
+        {
+          "id": 2,
+          "name": "Rock"
+        },
+        {
+          "id": 3,
+          "name": "Soul"
+        },
+        {
+          "id": 4,
+          "name": "Heavy Metal"
+        },
+        {
+          "id": 5,
+          "name": "Pop"
+        },
+        {
+          "id": 6,
+          "name": "Folk"
+
+        },
+        {
+          "id": 7,
+          "name": "Jazz"
+
+        },
+
+        {
+          "id": 8,
+          "name": "dance"
+
+        },
+
+        {
+          "id": 9,
+          "name": "Disco"
+
+        },
+      ]
+    });
+  }
+
+
+
 }

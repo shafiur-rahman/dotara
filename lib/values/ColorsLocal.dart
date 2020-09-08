@@ -2,10 +2,34 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ColorsLocal {
+static  Gradient gradient1 = LinearGradient(
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+       stops: [0.0,1.0],
+    colors: <Color>[Color(0xffE0330D), Color(0xffFFA756)]);
+static  Gradient gradient2 = LinearGradient(
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,
+    stops: [0.0,1.0],
+    colors: <Color>[Color(0xff757575),Color(0xff757575)]);
 
+bool shadow = false;
+bool small = false;
+bool bold = false;
   static final Shader linearGradient = LinearGradient(
-    colors: <Color>[Color(0xffE0330D), Color(0xffFFA756)],
-  ).createShader(Rect.fromLTWH(0.0, 0.0, 0.0, 70.0));
+      colors: <Color>[Color(0xffDA44bb), Color(0xff8921aa)],
+    //  colors: <Color>[Color(0xffE0330D), Color(0xffFFA756)],
+       begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+    stops: [0.0,1.0]
+
+  ).createShader(Rect.fromLTWH(0.0, 0.0,0.0, 5.0));
+
+  // static final Shader linearGradient = LinearGradient(
+  //   colors: <Color>[Color(0xffE0330D), Color(0xffFFA756)],
+  //   // begin: FractionalOffset.bottomCenter,
+  //   // end: FractionalOffset.topCenter,
+  // ).createShader(Rect.fromLTWH(10.0, 0.0, 0.0, 70.0));
 
 
   static theme1(){
