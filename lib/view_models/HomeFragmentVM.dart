@@ -2,8 +2,28 @@ import 'dart:convert';
 
 import 'package:dotara/mock_response/MockResponse.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 
 class HomeFragmentVM with ChangeNotifier{
+
+  bool upDirection = true, flag = true;
+  ScrollController controller;
+
+  callController(){
+    controller = ScrollController()
+      ..addListener(() {
+        upDirection = controller.position.userScrollDirection == ScrollDirection.forward;
+        notifyListeners();
+        // makes sure we don't call setState too much, but only when it is needed
+        if (upDirection != flag)
+          //setState(() {});
+        flag = upDirection;
+        notifyListeners();
+      });
+  }
+
+
+
   BuildContext context;
   bool loaded = false;
   bool albumLoaded = false;
@@ -11,12 +31,13 @@ class HomeFragmentVM with ChangeNotifier{
   List banner = [];
   List album = [];
   var release=[];
+
   HomeFragmentVM(this.context){
 
     loadAlbumList();
     loadAnoucement();
     loadNewRelease();
-
+    callController();
   }
 
   loadAnoucement() {

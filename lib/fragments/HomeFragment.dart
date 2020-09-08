@@ -11,8 +11,15 @@ import 'package:shimmer/shimmer.dart';
 import '../ViewModelController.dart';
 
 class HomeFragment extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
+
+
     return ChangeNotifierProvider.value(
       value: ViewModelController.getHomeFragmentVM(context),
       child: Consumer<HomeFragmentVM>(builder: (context, snapshot, _) {
@@ -348,22 +355,63 @@ class HomeFragment extends StatelessWidget {
     );
 
     if (snapshot.loaded && snapshot.albumLoaded && snapshot.releaseLoaded) {
-      return SingleChildScrollView(
-        child: Column(
+
+      return Stack(
           children: [
-            banner(),
-            album(),
-            albumList(),
-            Container(
-              margin: EdgeInsets.only(top: 8),
-              child: Divider(
-                color: Colors.white.withOpacity(.2),
+            SingleChildScrollView(
+              controller: snapshot.controller,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+
+                  banner(),
+                  album(),
+                  albumList(),
+                  Container(
+                    margin: EdgeInsets.only(top: 8),
+                    child: Divider(
+                      color: Colors.white.withOpacity(.2),
+                    ),
+                  ),
+                  newRelease(),
+                  newReleaseList()
+                ],
               ),
             ),
-            newRelease(),
-            newReleaseList()
+            Positioned(
+              top: 0,
+              child: snapshot.upDirection? Container(
+                height: 50,
+                color: Colors.green,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Search your song"),
+                        Icon(Icons.search)
+                      ],
+                    ),
+                  ),
+                    // height: 30,
+                    // width: MediaQuery.of(context).size.width-100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ):Text("NT",style: TextStyle(
+                  color: Colors.white
+              ),),
+            ),
           ],
-        ),
+
       );
     } else
       return Container(

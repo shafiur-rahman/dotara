@@ -1,5 +1,3 @@
-
-
 import 'package:dotara/fragments/HomeFragment.dart';
 import 'package:dotara/values/ColorsLocal.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +38,7 @@ class HomeVM with ChangeNotifier {
                   ? ColorsLocal.hexToColor("ED642C")
                   : Colors.grey[400].withOpacity(.4),
               fontFamily: "BalooDa2",
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
               fontSize: 12,),
           ),
         ],
@@ -48,8 +46,9 @@ class HomeVM with ChangeNotifier {
       Column(
         children: [
           IconButton(
+            padding:const EdgeInsets.all(0.0),
             icon: Icon(
-              Icons.store,
+              Icons.network_check,
               color: navbarIndex == 1
                   ? ColorsLocal.hexToColor("ED642C")
                   : Colors.grey[400].withOpacity(.4),
@@ -64,13 +63,13 @@ class HomeVM with ChangeNotifier {
             },
           ),
           Text(
-            "Store",
+            "Live Music",
             style: TextStyle(
                 color: navbarIndex == 1
                     ? ColorsLocal.hexToColor("ED642C")
                     : Colors.grey[400].withOpacity(.4),
                 fontFamily: "BalooDa2",
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
                 fontSize: 12),
           ),
         ],
@@ -101,7 +100,7 @@ class HomeVM with ChangeNotifier {
                     ? ColorsLocal.hexToColor("ED642C")
                     : Colors.grey[400].withOpacity(.4),
                 fontFamily: "BalooDa2",
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
                 fontSize: 12),
           ),
         ],
@@ -131,7 +130,7 @@ class HomeVM with ChangeNotifier {
                     ? ColorsLocal.hexToColor("ED642C")
                     : Colors.grey[400].withOpacity(.4),
                 fontFamily: "BalooDa2",
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
                 fontSize: 12),
           ),
         ],
