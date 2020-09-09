@@ -43,6 +43,11 @@ dependencies:
   shimmer: ^1.1.1
   cached_network_image: ^2.2.0+1
   flutter_swiper: ^1.1.6
+  seekbar: ^0.0.2
+  video_player: ^0.10.12
+  audio_service: ^0.14.1
+  just_audio: ^0.4.0
+  flutter_tts: ^1.2.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

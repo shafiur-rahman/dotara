@@ -5,6 +5,8 @@
 
 
 import 'package:dotara/view_models/HomeFragmentVM.dart';
+import 'package:dotara/view_models/MyMusicVM.dart';
+import 'package:dotara/views/MusicPlayerVM.dart';
 import 'package:flutter/cupertino.dart';
 
 class ViewModelController {
@@ -45,22 +47,22 @@ class ViewModelController {
   //   }
   //   return menuVM;
   // }
-  //
-  // static MyMusicVm myMusicVm ;
-  //
-  // static MyMusicVm getMyMusicFragmentVM(BuildContext context) {
-  //   if (myMusicVm == null) {
-  //     myMusicVm = new MyMusicVm(context);
-  //   }
-  //   return myMusicVm;
-  // }
-  //
-  // static MusicPlayerVM musicPlayerVM;
-  // static MusicPlayerVM getMusicPlayerVM() {
-  //   if(musicPlayerVM == null) {
-  //     musicPlayerVM = new MusicPlayerVM();
-  //   }
-  //   return musicPlayerVM;
-  // }
+
+  static MyMusicVm myMusicVm ;
+
+  static MyMusicVm getMyMusicFragmentVM(BuildContext context) {
+    if (myMusicVm == null) {
+      myMusicVm = new MyMusicVm(context);
+    }
+    return myMusicVm;
+  }
+
+  static MusicPlayerVM musicPlayerVM;
+  static MusicPlayerVM getMusicPlayerVM() {
+    if(musicPlayerVM == null) {
+      musicPlayerVM = new MusicPlayerVM();
+    }
+    return musicPlayerVM;
+  }
 }
 

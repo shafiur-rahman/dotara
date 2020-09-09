@@ -10,6 +10,7 @@ class HomeFragmentVM with ChangeNotifier{
   bool reachBottom = false;
   bool reachUp = true;
   ScrollController controller;
+  AnimationController animationController;
 
   callController(){
     controller = ScrollController()
@@ -35,6 +36,21 @@ class HomeFragmentVM with ChangeNotifier{
         notifyListeners();
       });
   }
+  callAnimationController(){
+    animationController =
+        AnimationController(duration: Duration(seconds: 4));
+    animationController = Tween<double>(
+      begin: 20,
+      end: 35,
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.ease,
+      ),
+    );
+    animationController.forward();
+  }
+
   BuildContext context;
   bool loaded = false;
   bool albumLoaded = false;

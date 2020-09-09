@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dotara/constants/RoutingConstants.dart';
 import 'package:dotara/values/ColorsLocal.dart';
 import 'package:dotara/view_models/HomeFragmentVM.dart';
 import 'package:flutter/cupertino.dart';
@@ -382,31 +381,89 @@ class HomeFragment extends StatelessWidget {
         decoration: BoxDecoration(
             gradient: ColorsLocal.scaffoldGradient
         ),
-        child: Stack(
-          children: [
-            Container(
-
-              margin: snapshot.reachUp && snapshot.upDirection
-                  ? EdgeInsets.only(top: 52)
-                  : EdgeInsets.only(top: 0),
-              child: Column(
+        child:Container(
+          // margin: snapshot.reachUp && snapshot.upDirection
+          //     ? EdgeInsets.only(top: 0)
+          //     : EdgeInsets.only(top: 0),
+          child: Column(
+            children: [
+              AnimatedContainer(
+                  height: snapshot.upDirection?42:0,
+                  width: snapshot.upDirection?MediaQuery.of(context).size.width:0,
+                  curve:  Curves.fastOutSlowIn,
+                  transform: (true
+                      ? (Matrix4.identity()
+                    ..translate(0.025 * MediaQuery.of(context).size.width, 0.025 * 42)// translate towards right and down
+                    ..scale(0.95, 0.95))// scale with to 95% anchorred at topleft of the AnimatedContainer
+                      : Matrix4.identity()),
+                  duration: Duration (seconds: 1),
+                  child:Container(
+                    // height: 42,
+                    //  color: Colors.green,
+                    // width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
+                      child: Container(
+                        child: OverflowBox(
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                            child: Row(
+                              mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  flex: 10,
+                                  child: Text(
+                                    "Search your song",
+                                    style: TextStyle(
+                                        color: ColorsLocal.hexToColor("4A4A4A")
+                                            .withOpacity(.8),
+                                        fontFamily: "BalooDa2",
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                   // color: Colors.green,
+                                    child: Icon(
+                                      Icons.search,
+                                      color: ColorsLocal.hexToColor("4A4A4A"),
+                                      size: snapshot.upDirection?14:0,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        // height: 30,
+                        // width: MediaQuery.of(context).size.width-100,
+                        decoration: BoxDecoration(
+                          // color: Colors.black.withOpacity(.8),
+                          color: ColorsLocal.hexToColor("1E2025"),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                      ),
+                    ),
+                  )
+              ),
+              Column(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        height: 50,
-                        // color: Colors.blue,
-                        child: ListView.builder(
-                          itemCount: snapshot.genreSelect.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (BuildContext context, i) {
-                            return Consumer<HomeFragmentVM>(
-                                builder: (context, snapshot, _) {
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    height: 50,
+                    // color: Colors.blue,
+                    child: ListView.builder(
+                      itemCount: snapshot.genreSelect.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, i) {
+                        return Consumer<HomeFragmentVM>(
+                            builder: (context, snapshot, _) {
                               var logic = snapshot
                                   .isSelected(snapshot.genreSelect[i]["id"]);
                               return Center(
                                 child: Container(
-                                    margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: logic
@@ -415,29 +472,29 @@ class HomeFragment extends StatelessWidget {
                                             width: 1),
                                         borderRadius: BorderRadius.circular(30),
                                         color: snapshot.isSelected(
-                                                snapshot.genreSelect[i]["id"])
+                                            snapshot.genreSelect[i]["id"])
                                             ? ColorsLocal.hexToColor("C4C4C4")
-                                                .withOpacity(.2)
+                                            .withOpacity(.2)
                                             : null,
                                         boxShadow: [
                                           snapshot.isSelected(
-                                                  snapshot.genreSelect[i]["id"])
+                                              snapshot.genreSelect[i]["id"])
                                               ? BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.1),
-                                                  spreadRadius: 3,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0,
-                                                      1), // changes position of shadow
-                                                )
+                                            color: Colors.grey
+                                                .withOpacity(0.1),
+                                            spreadRadius: 3,
+                                            blurRadius: 5,
+                                            offset: Offset(0,
+                                                1), // changes position of shadow
+                                          )
                                               : BoxShadow(
-                                                  color:
-                                                      Colors.grey.withOpacity(0),
-                                                  spreadRadius: 0,
-                                                  blurRadius: 0,
-                                                  offset: Offset(0,
-                                                      0), // changes position of shadow
-                                                )
+                                            color:
+                                            Colors.grey.withOpacity(0),
+                                            spreadRadius: 0,
+                                            blurRadius: 0,
+                                            offset: Offset(0,
+                                                0), // changes position of shadow
+                                          )
                                         ]),
                                     child: GestureDetector(
                                       onTap: () {
@@ -450,12 +507,12 @@ class HomeFragment extends StatelessWidget {
                                         child: GradientText(
                                           snapshot.genreSelect[i]["name"],
                                           gradient: snapshot.isSelected(
-                                                  snapshot.genreSelect[i]["id"])
+                                              snapshot.genreSelect[i]["id"])
                                               ? ColorsLocal.gradient1
                                               : ColorsLocal.gradient2,
                                           style: TextStyle(
                                             fontSize: snapshot.isSelected(
-                                                    snapshot.genreSelect[i]["id"])
+                                                snapshot.genreSelect[i]["id"])
                                                 ? 14
                                                 : 12,
                                             shadows: [
@@ -485,89 +542,71 @@ class HomeFragment extends StatelessWidget {
                                     )),
                               );
                             });
-                          },
-                        ),
-                      ),
-                      Container(
-                        height: .3,
-                        color: Colors.white.withOpacity(.5),
-                      )
-                    ],
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      controller: snapshot.controller,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          //banner(),
-                          topAlbum(),
-                          albumList(),
-                          album(),
-                          albumList(),
-                          Container(
-                            margin: EdgeInsets.only(top: 8),
-                            child: Divider(
-                              color: Colors.white.withOpacity(.2),
-                            ),
-                          ),
-                          newRelease(),
-                          newReleaseList()
-                        ],
-                      ),
+                      },
                     ),
                   ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 10,
-              child: AnimatedOpacity(
-                  opacity: snapshot.upDirection ? 1 : 0,
-                  duration: Duration(milliseconds: 800),
-                  child: snapshot.upDirection
-                      ? Container(
-                          height: 42,
-                          //  color: Colors.green,
-                          width: MediaQuery.of(context).size.width,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
-                            child: Container(
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Search your song",
-                                      style: TextStyle(
-                                          color: ColorsLocal.hexToColor("4A4A4A")
-                                              .withOpacity(.8),
-                                          fontFamily: "BalooDa2",
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 14),
-                                    ),
-                                    Icon(
-                                      Icons.search,
-                                      color: ColorsLocal.hexToColor("4A4A4A"),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              // height: 30,
-                              // width: MediaQuery.of(context).size.width-100,
-                              decoration: BoxDecoration(
-                               // color: Colors.black.withOpacity(.8),
-                                 color: ColorsLocal.hexToColor("1E2025"),
-                                borderRadius: BorderRadius.circular(50),
-                              ),
+                  Container(
+                    height: .3,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              // color: Colors.white.withOpacity(.5),
+                                gradient: LinearGradient(
+
+                                  //begin: Alignment.centerRight,
+                                  // end: Alignment.center,
+                                    stops: [0,1],
+                                    colors: <Color>[Colors.transparent,Colors.white])
                             ),
                           ),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              // color: Colors.white.withOpacity(.5),
+                                gradient: LinearGradient(
+                                  // begin: Alignment.centerLeft,
+                                  // end: Alignment.center,
+                                    stops: [0,1],
+                                    colors: <Color>[Colors.white,Colors.transparent])
+                            ),
+                          ),
+                          flex: 1,
                         )
-                      : null),
-            ),
-          ],
+                      ],
+                    ),
+
+                  )
+                ],
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: snapshot.controller,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      //banner(),
+                      topAlbum(),
+                      albumList(),
+                      album(),
+                      albumList(),
+                      Container(
+                        margin: EdgeInsets.only(top: 8),
+                        child: Divider(
+                          color: Colors.white.withOpacity(.2),
+                        ),
+                      ),
+                      newRelease(),
+                      newReleaseList()
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       );
     } else

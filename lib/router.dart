@@ -2,6 +2,7 @@ import 'package:dotara/views/Home.dart';
 import 'package:dotara/views/Intro.dart';
 import 'package:dotara/views/LogIn.dart';
 import 'package:dotara/views/MusicCategorySelect.dart';
+import 'package:dotara/views/MusicPlayer.dart';
 import 'package:dotara/views/SignUp.dart';
 import 'package:dotara/views/SplashScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,5 +31,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case MusicCategorySelectRoute:
       return MaterialPageRoute(
           settings: settings, builder: (context) => MusicCategorySelect());
+
+
+    case MusicPlayerRoute:
+      return MaterialPageRoute(
+          settings: settings, builder: (context) => MusicPlayer(settings.arguments));
+
   }
 }

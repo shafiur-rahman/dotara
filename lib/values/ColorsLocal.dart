@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ColorsLocal {
+
   static  Gradient scaffoldGradient = LinearGradient(
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
