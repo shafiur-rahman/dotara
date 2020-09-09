@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 class MusicCatergorySelectVM with ChangeNotifier{
 
   BuildContext context;
+
   bool saveGenre = false;
   bool musicListLoaded = false;
   List genreSelect = [];
