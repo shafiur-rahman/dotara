@@ -1,4 +1,6 @@
+import 'package:dotara/fragments/EventFragment.dart';
 import 'package:dotara/fragments/HomeFragment.dart';
+import 'package:dotara/fragments/MyMusicFragment.dart';
 import 'package:dotara/values/ColorsLocal.dart';
 import 'package:flutter/material.dart';
 
@@ -149,6 +151,12 @@ class HomeVM with ChangeNotifier {
 
     if (navbarIndex == 0) {
       return HomeFragment();
+    }
+else  if (navbarIndex == 3) {
+      return MyMusicFragment();
+    }
+    else  if (navbarIndex == 1) {
+      return EventFragment();
     }
 
     else {

@@ -5,3 +5,5 @@ const String LogInRoute = "/logIn";
 const String IntroRoute = "/intro";
 const String MusicCategorySelectRoute = "/musicCategorySelect";
 const String MusicPlayerRoute = "/musicPlayer";
+const String AlbumDetailsRoute = "/albumDetails";
+const String EventDetailsRoute = "/eventDetails";

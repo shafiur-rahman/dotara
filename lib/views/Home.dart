@@ -74,7 +74,6 @@ class Home extends StatelessWidget {
               elevation: 8,
               child: Container(
                 height: 80,
-
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: snapshot.getNavbarItems(),

@@ -1,3 +1,5 @@
+import 'package:dotara/views/AlbumDetails.dart';
+import 'package:dotara/views/EventDetails.dart';
 import 'package:dotara/views/Home.dart';
 import 'package:dotara/views/Intro.dart';
 import 'package:dotara/views/LogIn.dart';
@@ -21,6 +23,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case SignUpRoute:
       return MaterialPageRoute(
           settings: settings, builder: (context) => SignUp());
+    case EventDetailsRoute:
+      return MaterialPageRoute(
+          settings: settings, builder: (context) => EventDetails());
 
     case LogInRoute:
       return MaterialPageRoute(
@@ -32,6 +37,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           settings: settings, builder: (context) => MusicCategorySelect());
 
+    case AlbumDetailsRoute:
+      return MaterialPageRoute(
+          settings: settings, builder: (context) => AlbumDetails(settings.arguments));
 
     case MusicPlayerRoute:
       return MaterialPageRoute(

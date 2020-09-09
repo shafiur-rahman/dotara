@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dotara/constants/RoutingConstants.dart';
 import 'package:dotara/values/ColorsLocal.dart';
 import 'package:dotara/view_models/HomeFragmentVM.dart';
 import 'package:flutter/cupertino.dart';
@@ -155,12 +156,12 @@ class HomeFragment extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      // onTap: () {
-                      //   Navigator.pushNamed(context, AlbumDetailsRoute,
-                      //       arguments: {
-                      //         "album_id": snapshot.album[i]["album_id"]
-                      //       });
-                      // },
+                      onTap: () {
+                        Navigator.pushNamed(context, AlbumDetailsRoute,
+                            arguments: {
+                              "album_id": snapshot.album[i]["album_id"]
+                            });
+                      },
                       child: Container(
                         margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
                         width: MediaQuery.of(context).size.width - 250,

@@ -4,20 +4,21 @@
 */
 
 
+import 'package:dotara/view_models/EventFragmentVM.dart';
 import 'package:dotara/view_models/HomeFragmentVM.dart';
 import 'package:dotara/view_models/MyMusicVM.dart';
 import 'package:dotara/views/MusicPlayerVM.dart';
 import 'package:flutter/cupertino.dart';
 
 class ViewModelController {
-  // static EventFragmentVM eventFragmentVM;
-  //
-  // static EventFragmentVM getEventFragmentVM(BuildContext context) {
-  //   if (eventFragmentVM == null) {
-  //     eventFragmentVM = new EventFragmentVM(context);
-  //   }
-  //   return eventFragmentVM;
-  // }
+  static EventFragmentVM eventFragmentVM;
+
+  static EventFragmentVM getEventFragmentVM(BuildContext context) {
+    if (eventFragmentVM == null) {
+      eventFragmentVM = new EventFragmentVM(context);
+    }
+    return eventFragmentVM;
+  }
 
   static HomeFragmentVM homeFragmentVM;
 
