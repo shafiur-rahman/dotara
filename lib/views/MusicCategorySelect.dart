@@ -108,108 +108,113 @@ class MusicCategorySelect extends StatelessWidget {
           },
         )
       ],
-      child: Scaffold(
-          bottomNavigationBar: Consumer<MusicCatergorySelectVM>(
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: ColorsLocal.scaffoldGradient
+        ),
+        child: Scaffold(
+            bottomNavigationBar: Consumer<MusicCatergorySelectVM>(
 
-            builder: (context, snapshot,_) {
-              return BottomAppBar(
-                color: ColorsLocal.hexToColor("1C1E22"),
-                child: Container(
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60),
-                    gradient: LinearGradient(
-                        colors: [
-                          Color(0xffE0330D).withOpacity(1),
-                          Color(0xffFFA756).withOpacity(1)
-                        ],
+              builder: (context, snapshot,_) {
+                return BottomAppBar(
+                  color: Colors.transparent,
+                  child: Container(
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(60),
+                      gradient: LinearGradient(
+                          colors: [
+                            Color(0xffE0330D).withOpacity(1),
+                            Color(0xffFFA756).withOpacity(1)
+                          ],
 //                  begin: const FractionalOffset(3, 0.0),
 //                  end: const FractionalOffset(.2, 0.0),
-                        begin: FractionalOffset.centerLeft,
-                        end: FractionalOffset.centerRight,
-                        stops: [0.0, 1.0],
-                        tileMode: TileMode.clamp),
-                  ),
-                  margin: EdgeInsets.fromLTRB(25, 0, 25, 25),
-                  width: double.infinity,
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(60.0),
-                      //side: BorderSide(color: Colors.white, width: 0)
+                          begin: FractionalOffset.centerLeft,
+                          end: FractionalOffset.centerRight,
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp),
                     ),
-                    clipBehavior: Clip.antiAlias,
-                    onPressed: () {
-                      snapshot.saveFavoriteGenre();
-                      // Toast.show("GG", context);
-                       Navigator.pushNamed(context, HomeRoute);
-                    },
-                    child: Text(
-                      "Lets Play Dotara",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "BalooDa2",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20),
+                    margin: EdgeInsets.fromLTRB(25, 0, 25, 25),
+                    width: double.infinity,
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(60.0),
+                        //side: BorderSide(color: Colors.white, width: 0)
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      onPressed: () {
+                        snapshot.saveFavoriteGenre();
+                        // Toast.show("GG", context);
+                         Navigator.pushNamed(context, HomeRoute);
+                      },
+                      child: Text(
+                        "Lets Play Dotara",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "BalooDa2",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20),
+                      ),
+                      //color: Colors.transparent,
+                      height: 50,
                     ),
-                    //color: Colors.transparent,
-                    height: 50,
                   ),
+                );
+              }
+            ),
+            appBar: PreferredSize(
+                child: AppBar(
+                  elevation: 0.0,
                 ),
-              );
-            }
-          ),
-          appBar: PreferredSize(
-              child: AppBar(
-                elevation: 0.0,
-              ),
-              preferredSize: Size.fromHeight(0.0)),
-          body: SingleChildScrollView(
-              child: Container(
-            margin: EdgeInsets.fromLTRB(20, 30, 20, 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Choose The",
-                  style: TextStyle(
-                      height: 1,
-                      color: Colors.white,
-                      fontFamily: "BalooDa2",
-                      fontWeight: FontWeight.w600,
-                      fontSize: 30),
-                ),
-                Text(
-                  "Music You Like",
-                  style: TextStyle(
-                      height: 1,
-                      color: Colors.white,
-                      fontFamily: "BalooDa2",
-                      fontWeight: FontWeight.w600,
-                      fontSize: 30),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: Text(
-                    "we will set Dotara based on your music preference",
+                preferredSize: Size.fromHeight(0.0)),
+            body: SingleChildScrollView(
+                child: Container(
+              margin: EdgeInsets.fromLTRB(20, 30, 20, 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Choose The",
                     style: TextStyle(
                         height: 1,
-                        color: Colors.white.withOpacity(.6),
+                        color: Colors.white,
                         fontFamily: "BalooDa2",
                         fontWeight: FontWeight.w600,
-                        fontSize: 16),
+                        fontSize: 30),
                   ),
-                ),
-                Consumer<MusicCatergorySelectVM>(
-                    builder: (context, snapshot, _) {
-                  return Container(
-                    margin: EdgeInsets.only(top: 15),
-                    child: Wrap(children: _buildGenre(context, snapshot)),
-                  );
-                })
-              ],
-            ),
-          ))),
+                  Text(
+                    "Music You Like",
+                    style: TextStyle(
+                        height: 1,
+                        color: Colors.white,
+                        fontFamily: "BalooDa2",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 30),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Text(
+                      "we will set Dotara based on your music preference",
+                      style: TextStyle(
+                          height: 1,
+                          color: Colors.white.withOpacity(.6),
+                          fontFamily: "BalooDa2",
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16),
+                    ),
+                  ),
+                  Consumer<MusicCatergorySelectVM>(
+                      builder: (context, snapshot, _) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 15),
+                      child: Wrap(children: _buildGenre(context, snapshot)),
+                    );
+                  })
+                ],
+              ),
+            ))),
+      ),
     );
   }
 }

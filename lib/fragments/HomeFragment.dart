@@ -120,6 +120,30 @@ class HomeFragment extends StatelessWidget {
             ],
           ),
         );
+    Widget topAlbum() => Container(
+      margin: EdgeInsets.fromLTRB(21, 13, 21, 13),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "Top Albums",
+            style: TextStyle(
+                color: Colors.white.withOpacity(.8),
+                fontFamily: "BalooDa2",
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
+          ),
+          Text(
+            "Sell All",
+            style: TextStyle(
+                color: Colors.white.withOpacity(.25),
+                fontFamily: "BalooDa2",
+                fontWeight: FontWeight.w600,
+                fontSize: 12),
+          ),
+        ],
+      ),
+    );
     Widget albumList() => Container(
           margin: EdgeInsets.fromLTRB(11, 0, 10, 0),
           height: MediaQuery.of(context).size.height * .3,
@@ -138,42 +162,39 @@ class HomeFragment extends StatelessWidget {
                       //         "album_id": snapshot.album[i]["album_id"]
                       //       });
                       // },
-                      child: Hero(
-                        tag: snapshot.album[i]["album_id"],
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                          width: MediaQuery.of(context).size.width - 250,
-                          height: MediaQuery.of(context).size.height * .25,
-                          child: CachedNetworkImage(
-                            imageUrl: snapshot.album[i]['image_url']
-                                .toString()
-                                .toString(),
-                            imageBuilder: (context, imageProvider) => Container(
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                        width: MediaQuery.of(context).size.width - 250,
+                        height: MediaQuery.of(context).size.height * .25,
+                        child: CachedNetworkImage(
+                          imageUrl: snapshot.album[i]['image_url']
+                              .toString()
+                              .toString(),
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(5),
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                ),
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(0),
                               ),
                             ),
-                            placeholder: (context, url) => Shimmer.fromColors(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: Colors.grey[300],
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                              ),
-                              baseColor: Colors.grey[300],
-                              highlightColor: Colors.white,
-                            ),
-                            errorWidget: (context, url, error) => Icon(
-                              Icons.error,
-                              size: 32,
-                              color: Colors.grey,
-                            ),
+                            baseColor: Colors.grey[300],
+                            highlightColor: Colors.white,
+                          ),
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            size: 32,
+                            color: Colors.grey,
                           ),
                         ),
                       ),
@@ -357,189 +378,197 @@ class HomeFragment extends StatelessWidget {
         );
 
     if (snapshot.loaded && snapshot.albumLoaded && snapshot.releaseLoaded) {
-      return Stack(
-        children: [
-          Container(
-            margin: snapshot.reachUp && snapshot.upDirection
-                ? EdgeInsets.only(top: 52)
-                : EdgeInsets.only(top: 0),
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      height: 50,
-                      // color: Colors.blue,
-                      child: ListView.builder(
-                        itemCount: snapshot.genreSelect.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, i) {
-                          return Consumer<HomeFragmentVM>(
-                              builder: (context, snapshot, _) {
-                            var logic = snapshot
-                                .isSelected(snapshot.genreSelect[i]["id"]);
-                            return Center(
-                              child: Container(
-                                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: logic
-                                              ? Colors.white.withOpacity(.1)
-                                              : Colors.white.withOpacity(0),
-                                          width: 1),
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: snapshot.isSelected(
-                                              snapshot.genreSelect[i]["id"])
-                                          ? ColorsLocal.hexToColor("C4C4C4")
-                                              .withOpacity(.2)
-                                          : null,
-                                      boxShadow: [
-                                        snapshot.isSelected(
-                                                snapshot.genreSelect[i]["id"])
-                                            ? BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 3,
-                                                blurRadius: 5,
-                                                offset: Offset(0,
-                                                    1), // changes position of shadow
-                                              )
-                                            : BoxShadow(
-                                                color:
-                                                    Colors.grey.withOpacity(0),
-                                                spreadRadius: 0,
-                                                blurRadius: 0,
-                                                offset: Offset(0,
-                                                    0), // changes position of shadow
-                                              )
-                                      ]),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      snapshot.toggleSelection(
-                                          snapshot.genreSelect[i]["id"]);
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          15, 0, 15, 0),
-                                      child: GradientText(
-                                        snapshot.genreSelect[i]["name"],
-                                        gradient: snapshot.isSelected(
-                                                snapshot.genreSelect[i]["id"])
-                                            ? ColorsLocal.gradient1
-                                            : ColorsLocal.gradient2,
-                                        style: TextStyle(
-                                          fontSize: snapshot.isSelected(
-                                                  snapshot.genreSelect[i]["id"])
-                                              ? 14
-                                              : 12,
-                                          shadows: [
-                                            Shadow(
-                                                color: Colors.black26,
-                                                offset: Offset(0, 3),
-                                                blurRadius: 10)
-                                          ],
-                                          fontFamily: "BalooDa2",
-                                          fontWeight: logic
-                                              ? FontWeight.w600
-                                              : FontWeight.w400,
-                                        ),
+      return Container(
+        decoration: BoxDecoration(
+            gradient: ColorsLocal.scaffoldGradient
+        ),
+        child: Stack(
+          children: [
+            Container(
 
-                                        // Text(
-                                        //   snapshot.genreSelect[i]["name"],
-                                        //   style: TextStyle(
-                                        //     //  height: 1,
-                                        //       //color: ColorsLocal.hexToColor("757575"),
-                                        //       fontFamily: "BalooDa2",
-                                        //       fontWeight: FontWeight.w600,
-                                        //       fontSize: 32,
-                                        //   foreground: Paint()..shader = ColorsLocal.linearGradient),
-                                        // ),
+              margin: snapshot.reachUp && snapshot.upDirection
+                  ? EdgeInsets.only(top: 52)
+                  : EdgeInsets.only(top: 0),
+              child: Column(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        height: 50,
+                        // color: Colors.blue,
+                        child: ListView.builder(
+                          itemCount: snapshot.genreSelect.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, i) {
+                            return Consumer<HomeFragmentVM>(
+                                builder: (context, snapshot, _) {
+                              var logic = snapshot
+                                  .isSelected(snapshot.genreSelect[i]["id"]);
+                              return Center(
+                                child: Container(
+                                    margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: logic
+                                                ? Colors.white.withOpacity(.1)
+                                                : Colors.white.withOpacity(0),
+                                            width: 1),
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: snapshot.isSelected(
+                                                snapshot.genreSelect[i]["id"])
+                                            ? ColorsLocal.hexToColor("C4C4C4")
+                                                .withOpacity(.2)
+                                            : null,
+                                        boxShadow: [
+                                          snapshot.isSelected(
+                                                  snapshot.genreSelect[i]["id"])
+                                              ? BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 3,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      1), // changes position of shadow
+                                                )
+                                              : BoxShadow(
+                                                  color:
+                                                      Colors.grey.withOpacity(0),
+                                                  spreadRadius: 0,
+                                                  blurRadius: 0,
+                                                  offset: Offset(0,
+                                                      0), // changes position of shadow
+                                                )
+                                        ]),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        snapshot.toggleSelection(
+                                            snapshot.genreSelect[i]["id"]);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            15, 0, 15, 0),
+                                        child: GradientText(
+                                          snapshot.genreSelect[i]["name"],
+                                          gradient: snapshot.isSelected(
+                                                  snapshot.genreSelect[i]["id"])
+                                              ? ColorsLocal.gradient1
+                                              : ColorsLocal.gradient2,
+                                          style: TextStyle(
+                                            fontSize: snapshot.isSelected(
+                                                    snapshot.genreSelect[i]["id"])
+                                                ? 14
+                                                : 12,
+                                            shadows: [
+                                              Shadow(
+                                                  color: Colors.black26,
+                                                  offset: Offset(0, 3),
+                                                  blurRadius: 10)
+                                            ],
+                                            fontFamily: "BalooDa2",
+                                            fontWeight: logic
+                                                ? FontWeight.w600
+                                                : FontWeight.w400,
+                                          ),
+
+                                          // Text(
+                                          //   snapshot.genreSelect[i]["name"],
+                                          //   style: TextStyle(
+                                          //     //  height: 1,
+                                          //       //color: ColorsLocal.hexToColor("757575"),
+                                          //       fontFamily: "BalooDa2",
+                                          //       fontWeight: FontWeight.w600,
+                                          //       fontSize: 32,
+                                          //   foreground: Paint()..shader = ColorsLocal.linearGradient),
+                                          // ),
+                                        ),
                                       ),
-                                    ),
-                                  )),
-                            );
-                          });
-                        },
+                                    )),
+                              );
+                            });
+                          },
+                        ),
+                      ),
+                      Container(
+                        height: .3,
+                        color: Colors.white.withOpacity(.5),
+                      )
+                    ],
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: snapshot.controller,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          //banner(),
+                          topAlbum(),
+                          albumList(),
+                          album(),
+                          albumList(),
+                          Container(
+                            margin: EdgeInsets.only(top: 8),
+                            child: Divider(
+                              color: Colors.white.withOpacity(.2),
+                            ),
+                          ),
+                          newRelease(),
+                          newReleaseList()
+                        ],
                       ),
                     ),
-                    Container(
-                      height: .3,
-                      color: Colors.white.withOpacity(.5),
-                    )
-                  ],
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    controller: snapshot.controller,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        banner(),
-                        album(),
-                        albumList(),
-                        Container(
-                          margin: EdgeInsets.only(top: 8),
-                          child: Divider(
-                            color: Colors.white.withOpacity(.2),
-                          ),
-                        ),
-                        newRelease(),
-                        newReleaseList()
-                      ],
-                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            top: 10,
-            child: AnimatedOpacity(
-                opacity: snapshot.upDirection ? 1 : 0,
-                duration: Duration(milliseconds: 800),
-                child: snapshot.upDirection
-                    ? Container(
-                        height: 42,
-                        //  color: Colors.green,
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
-                          child: Container(
+            Positioned(
+              top: 10,
+              child: AnimatedOpacity(
+                  opacity: snapshot.upDirection ? 1 : 0,
+                  duration: Duration(milliseconds: 800),
+                  child: snapshot.upDirection
+                      ? Container(
+                          height: 42,
+                          //  color: Colors.green,
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
                             child: Container(
-                              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Search your song",
-                                    style: TextStyle(
-                                        color: ColorsLocal.hexToColor("4A4A4A")
-                                            .withOpacity(.8),
-                                        fontFamily: "BalooDa2",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14),
-                                  ),
-                                  Icon(
-                                    Icons.search,
-                                    color: ColorsLocal.hexToColor("4A4A4A"),
-                                  )
-                                ],
+                              child: Container(
+                                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Search your song",
+                                      style: TextStyle(
+                                          color: ColorsLocal.hexToColor("4A4A4A")
+                                              .withOpacity(.8),
+                                          fontFamily: "BalooDa2",
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14),
+                                    ),
+                                    Icon(
+                                      Icons.search,
+                                      color: ColorsLocal.hexToColor("4A4A4A"),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              // height: 30,
+                              // width: MediaQuery.of(context).size.width-100,
+                              decoration: BoxDecoration(
+                               // color: Colors.black.withOpacity(.8),
+                                 color: ColorsLocal.hexToColor("1E2025"),
+                                borderRadius: BorderRadius.circular(50),
                               ),
                             ),
-                            // height: 30,
-                            // width: MediaQuery.of(context).size.width-100,
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(.8),
-                              // color: ColorsLocal.hexToColor("1E2025"),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
                           ),
-                        ),
-                      )
-                    : null),
-          ),
-        ],
+                        )
+                      : null),
+            ),
+          ],
+        ),
       );
     } else
       return Container(

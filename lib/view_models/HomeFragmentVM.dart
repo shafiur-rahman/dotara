@@ -60,6 +60,7 @@ class HomeFragmentVM with ChangeNotifier{
     banner = response["banners"];
     notifyListeners();
   }
+
   loadAlbumList() {
     albumLoaded = false;
     var response = json.decode(MockResponse.getAlbumList());
@@ -68,6 +69,7 @@ class HomeFragmentVM with ChangeNotifier{
     album = response["album_list"];
     notifyListeners();
   }
+
   loadNewRelease() {
     releaseLoaded = false;
     var response = json.decode(MockResponse.getNewRelease());
@@ -82,7 +84,7 @@ class HomeFragmentVM with ChangeNotifier{
   List genreSelect = [];
   List<int> selectedSuggIds = new List();
 
-
+  int selectedType = 1;
 
   getFavoriteGenre() {
     List genreIds = new List();
@@ -93,36 +95,22 @@ class HomeFragmentVM with ChangeNotifier{
     }
     return genreIds;
   }
-
   saveFavoriteGenre(){
     saveGenre = true;
     notifyListeners();
   }
-
-
-
-
-
   bool isSelected(int id) {
-    for(int i = 0; i < selectedSuggIds.length; i++) {
-      if(selectedSuggIds[i] == id) {
-        return true;
-      }
+    if(selectedType == id){
+      return true;
     }
     return false;
   }
-
   toggleSelection(int id) {
-    for(int i = 0; i < selectedSuggIds.length; i++) {
-      if(selectedSuggIds[i] == id) {
-        selectedSuggIds.removeAt(i);
-        notifyListeners();
-        return;
-      }
-    }
-    selectedSuggIds.add(id);
+    selectedType = id;
+    print("selected:"+selectedType.toString());
     notifyListeners();
   }
+
 
   loadGenreType(){
     musicListLoaded = false;

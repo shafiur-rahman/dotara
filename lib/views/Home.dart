@@ -70,10 +70,11 @@ class Home extends StatelessWidget {
             return BottomAppBar(
               clipBehavior: Clip.antiAlias,
               notchMargin: 5.0,
-              color: Colors.black,
+            color: ColorsLocal.hexToColor("1E2025"),
               elevation: 8,
               child: Container(
                 height: 80,
+
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: snapshot.getNavbarItems(),
